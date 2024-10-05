@@ -7,7 +7,8 @@ Fabricante.belongsToMany(Producto)
 
 
 Producto.belongsToMany(Componente)
-Componente.belongsToMany(Fabricante)
+Componente.belongsToMany(Producto)
+
 
 module.exports = {
     Componente,

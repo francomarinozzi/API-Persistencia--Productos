@@ -1,13 +1,17 @@
 const express = require('express')
 const sequelize = require('../config/database')
 const { Producto } = require('./models/producto')
+const route = require('./routes/index')
+
 
 const app = express()
 
 app.use(express.json())
 
+app.use(route)
 
-sequelize.sync({ })
+
+sequelize.sync({ force:true})
     .then(() => {
         console.log('Tablas creadas')
     })
