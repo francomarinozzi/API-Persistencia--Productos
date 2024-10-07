@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(route)
 
 
-sequelize.sync({ force:true})
+sequelize.sync({ force:true})  //Sacar force:true para que persistan los datos
     .then(() => {
         console.log('Tablas creadas')
     })

@@ -22,11 +22,27 @@ const getProductos = async(req,res) =>{
         res.status(201).json(nuevoProducto)
         }
         catch(error){
-            res.status(400).send('Error')
-        }
+        res.status(400).send('Error')
     }
+}
+
+
+const getProductosById = async (req,res) =>{
+    const id = req.params.id
+    try{
+        const producto = await Producto.findByPk(id)
+        if(!producto){
+            res.status(404).send('Producto no encontrado')
+        }
+        res.status(200).json(producto)
+    }
+    catch{
+        res.status(404).send('Producto no encontrado')
+    }
+}
 
 module.exports = {
     getProductos,
-    crearProducto
+    crearProducto,
+    getProductosById
 }
