@@ -1,6 +1,6 @@
 const express = require('express')
 const sequelize = require('../config/database')
-const { Producto } = require('./models/producto')
+const { Producto , Fabricante, Componente} = require('./models/')
 const route = require('./routes/index')
 const {crearDatosIniciales} = require('./seeders/')
 
@@ -14,13 +14,15 @@ app.use(route)
 
 crearDatosIniciales() //seed para pruebas
 
-sequelize.sync({ force:true})  //Sacar force:true para que persistan los datos
-.then(() => {
-        console.log('Tablas creadas')
-    })
-    .catch( error => console.log('Error en creacion de tablas'))
 
 
+async function sincronizar() {
+    await sequelize.sync({force:true}); // Forzar la creación de tablas
+    console.log('Tablas creadas');
+    await crearDatosIniciales(); // Sembrar datos
+}
+
+sincronizar()
 const PORT = 3000
 app.listen(PORT, () =>{
     console.log(`Ejecutando en el puerto ${PORT}`)

@@ -5,10 +5,15 @@ async function crearDatosIniciales() {
     try{
         await initialFabricantes();
         await initialProducts();
+        
     }
     catch(error){
         console.log('Error', error)
     }
 } 
+
+
+
+
 
 module.exports = {crearDatosIniciales}

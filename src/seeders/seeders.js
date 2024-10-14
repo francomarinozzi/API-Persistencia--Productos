@@ -1,29 +1,6 @@
 const Producto = require('../models/producto')
 const Fabricante=require('../models/fabricante')
 
-async function initialProducts(){
-    try{
-        const producto1 = await Producto.create({
-            nombre: 'Monitor',
-            precio:300
-        })
-        const producto2 = await Producto.create({
-            nombre: 'Teclado',
-            precio:50
-        })
-        const producto3 = await Producto.create({
-            nombre: 'Mouse',
-            precio:60
-        })
-
-        console.log('Datos creados')
-    }
-    catch(error){
-        console.log('Error al crear los datos', error)
-    }
-
-}
-
 async function initialFabricantes(){
     try{
         const fabricante1 = await Fabricante.create({
@@ -43,6 +20,40 @@ async function initialFabricantes(){
         })
 
         console.log('Datos creados')
+        return [fabricante1,fabricante2,fabricante3]
+    }
+    catch(error){
+        console.log('Error al crear los datos', error)
+        return []
+    }
+
+
+}
+
+async function initialProducts(){
+    const fabricantes = await initialFabricantes()
+    try{
+        const producto1 = await Producto.create({
+            nombre: 'Monitor',
+            precio:300
+        })
+        const producto2 = await Producto.create({
+            nombre: 'Teclado',
+            precio:50
+        })
+        const producto3 = await Producto.create({
+            nombre: 'Mouse',
+            precio:60
+        })
+
+        await producto1.addFabricante(fabricantes[0]);
+        await producto1.addFabricante(fabricantes[1]);
+        await producto1.addFabricante(fabricantes[2]);
+
+        await producto2.addFabricante(fabricantes[0]);
+        await producto2.addFabricante(fabricantes[1]);
+        await producto3.addFabricante(fabricantes[2]);
+        console.log('Datos creados')
     }
     catch(error){
         console.log('Error al crear los datos', error)
@@ -50,8 +61,10 @@ async function initialFabricantes(){
 
 }
 
+
+
 module.exports = {
     initialProducts,
-    initialFabricantes
+    initialFabricantes,
 
 }

@@ -1,3 +1,4 @@
+const sequelize = require('../../config/database')
 const Componente = require('./componente')
 const Fabricante = require('./fabricante')
 const Producto = require('./producto')

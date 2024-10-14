@@ -125,5 +125,6 @@ module.exports = {
     getProductosById,
     modificarProducto,
     borrarProducto,
+    asociarProductoConFabricante,
     getFabricantesByProducto
 }
