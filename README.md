@@ -172,5 +172,5 @@ Obtiene los datos del producto registrado con el id 1, con todos los fabricantes
 - La entega debe soportar cambiar la configuración del motor de base de datos de forma simple en funcion de probar con distintos motores.
 
 
-
+### Usar 'npm i' al descargar el proyecto para instalar las dependencias en el repo local.
 
