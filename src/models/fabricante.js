@@ -6,7 +6,8 @@ class Fabricante extends Model {}
 Fabricante.init({
     nombre:{
         type:DataTypes.STRING(),
-        allowNull:false
+        allowNull:false,
+        unique:true
     },
     direccion:{
         type:DataTypes.STRING(),

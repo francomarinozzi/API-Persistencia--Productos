@@ -6,7 +6,8 @@ class Componente extends Model {}
 Componente.init({
     nombre:{
         type:DataTypes.STRING(),
-        allowNull:false
+        allowNull:false,
+        unique:true
     },
     descripcion:DataTypes.STRING()
 },{

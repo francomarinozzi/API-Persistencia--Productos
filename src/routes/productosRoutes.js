@@ -11,6 +11,6 @@ route.get('/:id', controllerProductos.getProductosById )
 
 route.post('/',validador(productoSchema), controllerProductos.crearProducto)
 
-
+route.put('/:id', validador(productoSchema), controllerProductos.modificarProducto)
 
 module.exports = route
