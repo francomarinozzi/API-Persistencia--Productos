@@ -13,4 +13,6 @@ route.post('/',validador(productoSchema), controllerProductos.crearProducto)
 
 route.put('/:id', validador(productoSchema), controllerProductos.modificarProducto)
 
+route.delete('/:id', controllerProductos.borrarProducto)
+
 module.exports = route

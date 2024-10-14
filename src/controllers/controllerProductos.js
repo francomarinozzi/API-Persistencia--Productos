@@ -22,7 +22,7 @@ const getProductos = async(req,res) =>{
         return res.status(201).json(nuevoProducto)
         }
         catch(error){
-            return res.status(400).send('Error al crear producto')
+            return res.status(400).send('Error al crear producto',error)
     }
 }
 
@@ -55,11 +55,35 @@ const modificarProducto = async(req,res) =>{
     return res.status(200).send('Producto actualizado')
 }
 
+const borrarProducto = async(req,res) =>{
+    const idProducto = req.params.id
+    
+    if(!idProducto){
+        return res.status(400).send('ID erronea. ')
+    }
 
+    try{
+        const eliminar = await Producto.destroy({
+            where:{
+                id:idProducto
+            }
+        })
+
+        if (!eliminar){
+            return res.status(404).send('Producto no encontrado')
+        }
+        return res.status(200).send('Producto eliminado')
+    }
+    catch(error){
+        return res.status(500).send('Error al eliminar producto')
+    }
+
+}
 
 module.exports = {
     getProductos,
     crearProducto,
     getProductosById,
-    modificarProducto
+    modificarProducto,
+    borrarProducto
 }
