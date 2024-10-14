@@ -14,7 +14,7 @@ app.use(route)
 
 crearDatosIniciales() //seed para pruebas
 
-sequelize.sync({ })  //Sacar force:true para que persistan los datos
+sequelize.sync({ force:true})  //Sacar force:true para que persistan los datos
 .then(() => {
         console.log('Tablas creadas')
     })

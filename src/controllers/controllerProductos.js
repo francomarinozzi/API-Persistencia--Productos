@@ -1,4 +1,5 @@
 const Producto = require('../models/producto')
+const Fabricante=require('../models/fabricante')
 
 
 const getProductos = async(req,res) =>{
@@ -79,11 +80,50 @@ const borrarProducto = async(req,res) =>{
     }
 
 }
+const getFabricantesByProducto = async (req,res) =>{
+    const id = req.params.id
+    try{
+        const producto = await Producto.findByPk(id,{
+            include:{
+                model:Fabricante
+            }
+        })
+        if(!producto){
+            res.status(404).send('Producto no encontrado')
+        }
+        return res.status(200).json(producto.Fabricantes)
+    }
+    catch{
+        return res.status(404).send('Producto no encontrado')
+    }
+}
+
+const asociarProductoConFabricante=async(req,res)=>{
+    const fabricante=req.params.fabricante
+    const producto=req.params.id
+    try {
+        const producto = await Producto.findByPk(producto);
+        if (!producto) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+        const fabricante = await Fabricante.findByPk(fabricante);
+        if (!fabricante) {
+            return res.status(404).json({ error: 'Fabricante no encontrado' });
+        }
+        await producto.addFabricante(fabricante); 
+        res.status(201).json({ message: 'Fabricante asociado al producto' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al asociar fabricante' });
+    }
+};
+
 
 module.exports = {
     getProductos,
     crearProducto,
     getProductosById,
     modificarProducto,
-    borrarProducto
+    borrarProducto,
+    getFabricantesByProducto
 }
