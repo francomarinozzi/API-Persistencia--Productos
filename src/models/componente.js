@@ -11,7 +11,6 @@ Componente.init({
     },
     descripcion:DataTypes.STRING(),
     
-    
 },{
     sequelize,
     modelName:'componente'

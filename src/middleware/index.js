@@ -1,5 +1,5 @@
 const productoSchema = require('./productoSchema')
-
+const fabricanteSchema = require('./fabricanteSchema')
 
 const validador = (schema) =>{
     return (req,res,next) => {
@@ -13,4 +13,4 @@ const validador = (schema) =>{
     next()
 }}
 
-module.exports = {validador , productoSchema }
+module.exports = {validador , productoSchema , fabricanteSchema}
