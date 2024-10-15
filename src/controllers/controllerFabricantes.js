@@ -16,7 +16,7 @@ catch(error){
 const getFabricantesById=async(req,res)=>{
     const idFabricante=req.params.id
     try{
-    const fabricante = await Fabricante.findByPk(id)
+    const fabricante = await Fabricante.findByPk(idFabricante)
     if(!fabricante){
         res.status(404).send('Fabricante no encontrado')
     }
@@ -26,7 +26,10 @@ const getFabricantesById=async(req,res)=>{
     return res.status(404).send('Fabricante no encontrado')
 }
 }
+
+
 const crearFabricante= async(req,res)=>{
+    
     const { nombre, direccion, numeroContacto } = req.body
     try {
     const nuevoFabricante = await Fabricante.create({

@@ -12,7 +12,7 @@ app.use(express.json())
 
 app.use(route)
 
-crearDatosIniciales() //seed para pruebas
+
 
 async function sincronizar() {
     await sequelize.sync({force:true}); // Forzar la creación de tablas

@@ -8,7 +8,7 @@ const getProductos = async(req,res) =>{
         const productos = await Producto.findAll()
         return res.status(200).json(productos)
     }
-    catch(error){
+    catch{
         return res.status(404)
     }
 }
@@ -90,11 +90,12 @@ const getFabricantesByProducto = async (req,res) =>{
             }
         })
         if(!producto){
-            res.status(404).send('Producto no encontrado')
+            return res.status(404).send('Producto no encontrado')
         }
-        return res.status(200).json(producto.Fabricantes)
+        //const fabricantes = producto.Fabricantes || 
+        return res.status(200).json(producto.Fabricante)
     }
-    catch{
+    catch(error){
         return res.status(404).send('Producto no encontrado')
     }
 }

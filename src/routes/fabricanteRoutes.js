@@ -9,6 +9,6 @@ route.get('/',controllerFabricantes.getFabricantes)
 
 route.get('/:id',controllerFabricantes.getFabricantesById)
 
-route.post('/fabricante',controllerFabricantes.crearFabricante)
+route.post('/',controllerFabricantes.crearFabricante)
 
 module.exports=route

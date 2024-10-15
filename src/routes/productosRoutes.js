@@ -5,22 +5,22 @@ const {productoSchema, validador} = require('../middleware')
 
 const route = Router()
 
-route.get('/', controllerProductos.getProductos )
+route.get('/', controllerProductos.getProductos ) //Obtener todos los productos
 
-route.get('/:id', controllerProductos.getProductosById )
+route.get('/:id', controllerProductos.getProductosById ) //Obtener un producto en particular
 
-route.post('/',validador(productoSchema), controllerProductos.crearProducto)
+route.post('/',validador(productoSchema), controllerProductos.crearProducto) //Crear un producto
 
-route.put('/:id', validador(productoSchema), controllerProductos.modificarProducto)
+route.put('/:id', validador(productoSchema), controllerProductos.modificarProducto) //Modificar un producto
 
-route.delete('/:id', controllerProductos.borrarProducto)
+route.delete('/:id', controllerProductos.borrarProducto) //Borrar un producto
 
-route.post('/:id/fabricante', controllerProductos.asociarProductoConFabricante)
+route.post('/:id/fabricante', controllerProductos.asociarProductoConFabricante) //asociar producto con fabricante
 
-route.get('/:id/fabricante', controllerProductos.getFabricantesByProducto)
+route.get('/:id/fabricantes', controllerProductos.getFabricantesByProducto) //Obtener todos los fabricantes de un producto
 
-route.post('/:id/componente',controllerProductos.asociarProductoConComponente)
+route.post('/:id/componente',controllerProductos.asociarProductoConComponente) //asociar un producto con 1 o n componentes
 
-route.get('/:id/fabricante', controllerProductos.getComponentesByProducto)
+route.get('/:id/fabricante', controllerProductos.getComponentesByProducto) //Obtener todos los componentes de un producto
 
 module.exports = route
