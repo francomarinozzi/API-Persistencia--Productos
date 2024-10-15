@@ -19,4 +19,8 @@ route.post('/:id/fabricante', controllerProductos.asociarProductoConFabricante)
 
 route.get('/:id/fabricante', controllerProductos.getFabricantesByProducto)
 
+route.post('/:id/componente',controllerProductos.asociarProductoConComponente)
+
+route.get('/:id/fabricante', controllerProductos.getComponentesByProducto)
+
 module.exports = route

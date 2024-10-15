@@ -1,5 +1,6 @@
 const Producto = require('../models/producto')
 const Fabricante=require('../models/fabricante')
+const Componente=require('../models/componente')
 
 
 const getProductos = async(req,res) =>{
@@ -12,19 +13,19 @@ const getProductos = async(req,res) =>{
     }
 }
 
-    const crearProducto = async(req,res) =>{
-        const { nombre, descripcion, precio } = req.body
-        try {
-            const nuevoProducto = await Producto.create({
-            nombre,
-            descripcion,
-            precio
+const crearProducto = async(req,res) =>{
+    const { nombre, descripcion, precio } = req.body
+    try {
+    const nuevoProducto = await Producto.create({
+    nombre,
+    descripcion,
+    precio
         }) 
-        return res.status(201).json(nuevoProducto)
+    return res.status(201).json(nuevoProducto)
         }
-        catch(error){
-            return res.status(400).send('Error al crear producto',error)
-    }
+    catch(error){
+    return res.status(400).send('Error al crear producto',error)
+}
 }
 
 
@@ -118,6 +119,44 @@ const asociarProductoConFabricante=async(req,res)=>{
     }
 };
 
+const asociarProductoConComponente= async(req,res)=>{
+    const componente=req.params.componente
+    const producto=req.params.id
+    try{
+        const producto=await Producto.findByPk(producto)
+        if(!producto){
+            return res.status(404).json({error:"Producto no encontrado"})
+        }
+        const componente= await Componente.findByPk(componente)
+        if(!componente){
+            return res.status(404).json({error:"Componente no encontrado"})
+        }
+        await producto.addComponente(componente); 
+        res.status(201).json({ message: 'Componente asociado al producto' });
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).json({error:"error al asociar componente"})
+    }
+}
+
+const getComponentesByProducto = async (req,res) =>{
+    const id = req.params.id
+    try{
+        const producto = await Producto.findByPk(id,{
+            include:{
+                model:Componente
+            }
+        })
+        if(!producto){
+            res.status(404).send('Producto no encontrado')
+        }
+        return res.status(200).json(producto.Componente)
+    }
+    catch{
+        return res.status(404).send('Producto no encontrado')
+    }
+}
 
 module.exports = {
     getProductos,
@@ -126,5 +165,7 @@ module.exports = {
     modificarProducto,
     borrarProducto,
     asociarProductoConFabricante,
-    getFabricantesByProducto
+    getFabricantesByProducto,
+    asociarProductoConComponente,
+    getComponentesByProducto
 }
