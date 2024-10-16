@@ -1,7 +1,4 @@
-const Producto = require('../models/producto')
-const Fabricante=require('../models/fabricante')
-const Componente=require('../models/componente')
-
+const {Componente, Fabricante, Producto} = require('../models/')
 
 const getProductos = async(req,res) =>{
     try{

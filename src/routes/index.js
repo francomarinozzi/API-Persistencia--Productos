@@ -8,5 +8,6 @@ router.use('/productos', productosRoutes)
 router.use('/fabricantes',fabricanteRoutes)
 router.use('/componentes', componenteRoutes)
 
+// en unos usamos route y otros routes, nose si es lo mismo
 
 module.exports = router
