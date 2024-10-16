@@ -44,8 +44,42 @@ const crearFabricante= async(req,res)=>{
 }
 }
 
+const modificarFabricante = async (req, res) => {
+    const idFabricante = req.params.id;
+    const datosNuevos = req.body;
+    try {
+        const fabricante = await Fabricante.findByPk(idFabricante);
+
+        if (!fabricante) {
+            return res.status(404).send('Fabricante no encontrado');
+        }
+        await fabricante.update(datosNuevos);
+        return res.status(200).send('Fabricante actualizado');
+    } catch (error) {
+    }
+};
+
+const borrarFabricante = async (req, res) => {
+    const idFabricante = req.params.id;
+
+    try {
+        const fabricante = await Fabricante.findByPk(idFabricante);
+
+        if (!fabricante) {
+            return res.status(404).send('Fabricante no encontrado');
+        }
+
+        await fabricante.destroy();
+        return res.status(200).send('Fabricante eliminado');
+    } catch (error) {
+        return res.status(500).send('Error al eliminar fabricante');
+    }
+};
+
 module.exports={
     getFabricantes,
     getFabricantesById,
-    crearFabricante
+    crearFabricante,
+    modificarFabricante,
+    borrarFabricante
 }
