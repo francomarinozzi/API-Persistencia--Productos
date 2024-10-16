@@ -11,7 +11,7 @@ route.get('/:id', controllerProductos.getProductosById ) //Obtener un producto e
 
 route.post('/',validador(productoSchema), controllerProductos.crearProducto) //Crear un producto
 
-route.put('/:id', validador(productoSchema), controllerProductos.modificarProducto) //Modificar un producto
+route.put('/:id', validador(productoSchema,true), controllerProductos.modificarProducto) //Modificar un producto
 
 route.delete('/:id', controllerProductos.borrarProducto) //Borrar un producto
 
