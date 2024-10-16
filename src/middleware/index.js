@@ -1,5 +1,7 @@
 const productoSchema = require('./productoSchema')
 const fabricanteSchema = require('./fabricanteSchema')
+const componenteSchema = require('./componenteSchema')
+
 
 const validador = (schema, isUpdating = false) =>{
     return (req,res,next) => {
@@ -8,7 +10,7 @@ const validador = (schema, isUpdating = false) =>{
             presence : isUpdating ? 'optional' : 'required'
         }
 
-        const result = schema.validate(req.body)
+        const result = schema.validate(req.body, validationOptions)
 
         if(result.error){
         console.log(result.error.details)
@@ -18,4 +20,4 @@ const validador = (schema, isUpdating = false) =>{
     next()
 }}
 
-module.exports = {validador , productoSchema , fabricanteSchema}
+module.exports = {validador , productoSchema , fabricanteSchema, componenteSchema}

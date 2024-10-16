@@ -9,7 +9,7 @@ route.get('/',controllerFabricantes.getFabricantes)
 
 route.get('/:id',controllerFabricantes.getFabricantesById)
 
-route.post('/',validador(fabricanteSchema),controllerFabricantes.crearFabricante)
+route.post('/',validador(fabricanteSchema,false),controllerFabricantes.crearFabricante)
 
 route.put('/:id', validador(fabricanteSchema,true),controllerFabricantes.modificarFabricante) //el valor 'true' es solo si el metodo es PUT
 

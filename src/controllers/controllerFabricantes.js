@@ -40,7 +40,7 @@ const crearFabricante= async(req,res)=>{
     return res.status(201).json(nuevoFabricante)
         }
     catch(error){
-    return res.status(400).send('Error al crear fabricante',error)
+    return res.status(400).json({ message: 'Error al crear fabricante', error: error.message })
 }
 }
 
