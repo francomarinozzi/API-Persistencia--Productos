@@ -1,8 +1,13 @@
 const productoSchema = require('./productoSchema')
 const fabricanteSchema = require('./fabricanteSchema')
 
-const validador = (schema) =>{
+const validador = (schema, isUpdating = false) =>{
     return (req,res,next) => {
+        
+        const validationOptions = {
+            presence : isUpdating ? 'optional' : 'required'
+        }
+
         const result = schema.validate(req.body)
 
         if(result.error){
