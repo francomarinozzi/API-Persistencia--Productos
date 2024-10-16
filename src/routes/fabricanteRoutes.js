@@ -13,6 +13,6 @@ route.post('/',validador(fabricanteSchema,false),controllerFabricantes.crearFabr
 
 route.put('/:id', validador(fabricanteSchema,true),controllerFabricantes.modificarFabricante) //el valor 'true' es solo si el metodo es PUT
 
-route.delete('/:id', controllerFabricantes.borrarFabricante);
+route.delete('/:id', controllerFabricantes.borrarFabricante)
 
 module.exports=route
