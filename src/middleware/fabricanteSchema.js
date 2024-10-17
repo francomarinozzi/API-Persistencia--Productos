@@ -9,7 +9,8 @@ const fabricanteSchema = Joi.object({
 })
 
 
-/*Estan todos establecidos como optional() porque en el momento de la validacion se evalúa si se está creando un nuevo registro o
+/*Estan todos establecidos como optional() porque en el momento de la validacion (index.js/validador) se evalúa si se está creando un nuevo registro o
 si se está modificando uno existente. 
 */
+
 module.exports = fabricanteSchema

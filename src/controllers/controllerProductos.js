@@ -21,7 +21,7 @@ const crearProducto = async(req,res) =>{
     return res.status(201).json(nuevoProducto)
         }
     catch(error){
-    return res.status(400).send('Error al crear producto',error)
+    return res.status(400).json({message:'Error al crear producto',error})
 }
 }
 
@@ -31,12 +31,12 @@ const getProductosById = async (req,res) =>{
     try{
         const producto = await Producto.findByPk(id)
         if(!producto){
-            res.status(404).send('Producto no encontrado')
+            res.status(404).json({message:'Producto no encontrado'})
         }
         return res.status(200).json(producto)
     }
     catch{
-        return res.status(404).send('Producto no encontrado')
+        return res.status(404).json({message:'Producto no encontrado'})
     }
 }
 
@@ -47,18 +47,19 @@ const modificarProducto = async(req,res) =>{
     const datosNuevos = req.body
 
     if(!producto){
-        return res.status(404).send('Producto no encontrado')
+        return res.status(404).json({message:'Producto no encontrado'})
     }
 
     await producto.update(datosNuevos)
-    return res.status(200).send('Producto actualizado')
+    return res.status(200).json({message:'Producto actualizado'})
 }
+
 
 const borrarProducto = async(req,res) =>{
     const idProducto = req.params.id
     
     if(!idProducto){
-        return res.status(400).send('ID erronea. ')
+        return res.status(400).json({message:'ID erronea. '})
     }
 
     try{
@@ -69,12 +70,12 @@ const borrarProducto = async(req,res) =>{
         })
 
         if (!eliminar){
-            return res.status(404).send('Producto no encontrado')
+            return res.status(404).json({message:'Producto no encontrado'})
         }
-        return res.status(200).send('Producto eliminado')
+        return res.status(200).json({message:'Producto eliminado'})
     }
     catch(error){
-        return res.status(500).send('Error al eliminar producto')
+        return res.status(500).json({message:'Error al eliminar producto',error})
     }
 
 }
@@ -87,13 +88,13 @@ const getFabricantesByProducto = async (req,res) =>{
             }
         })
         if(!producto){
-            return res.status(404).send('Producto no encontrado')
+            return res.status(404).json({message:'Producto no encontrado'})
         }
         //const fabricantes = producto.Fabricantes || 
         return res.status(200).json(producto.Fabricante)
     }
     catch(error){
-        return res.status(404).send('Producto no encontrado')
+        return res.status(404).json({message:'Producto no encontrado',error})
     }
 }
 
@@ -147,12 +148,12 @@ const getComponentesByProducto = async (req,res) =>{
             }
         })
         if(!producto){
-            res.status(404).send('Producto no encontrado')
+            res.status(404).json({message:'Producto no encontrado'})
         }
         return res.status(200).json(producto.Componente)
     }
     catch{
-        return res.status(404).send('Producto no encontrado')
+        return res.status(404).json({message:'Producto no encontrado'})
     }
 }
 

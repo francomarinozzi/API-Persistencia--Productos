@@ -7,7 +7,7 @@ const getComponentes = async (req, res) => {
       const componentes = await Componente.findAll()
       res.status(200).json(componentes)
     } catch (error) {
-      res.status(500).send('Error al obtener los componentes')
+      res.status(500).json({message:'Error al obtener los componentes'})
     }
 }
 
@@ -16,11 +16,11 @@ const getComponenteById = async (req, res) => {
     try {
         const componente = await Componente.findByPk(idComponente)
         if (!componente) {
-            return res.status(404).send('Componente no encontrado')
+            return res.status(404).json({message:'Componente no encontrado'})
         }
         return res.status(200).json(componente);
     } catch (error) {
-        return res.status(500).send('Error al obtener el componente')
+        return res.status(500).json({message:'Error al obtener el componente'})
     }
 };
 
@@ -33,7 +33,7 @@ const crearComponente = async (req, res) => {
         });
         return res.status(200).json(nuevoComponente)
     } catch (error) {
-        return res.status(400).send('Error al crear el componente')
+        return res.status(400).json({message:'Error al crear el componente'},error)
     }
 };
 
@@ -45,13 +45,13 @@ const modificarComponente = async (req, res) => {
         const componente = await Componente.findByPk(idComponente)
 
         if (!componente) {
-            return res.status(404).send('Componente no encontrado')
+            return res.status(404).json('Componente no encontrado')
         }
 
         await componente.update(datosNuevos);
-        return res.status(201).send('Componente actualizado')
+        return res.status(201).json({message:'Componente actualizado'})
     } catch (error) {
-        return res.status(500).send('Componente no encontrado')
+        return res.status(500).json({message:'Componente no actualizado'},error)
     }
 };
 
@@ -60,12 +60,12 @@ const borrarComponente = async (req, res) => {
     try {
         const componente = await Componente.findByPk(idComponente)
         if (!componente) {
-            return res.status(404).send('Componente no encontrado')
+            return res.status(404).json({message:'Componente no encontrado'})
         }
         await componente.destroy()
-        return res.status(201).send('Componente eliminado')
+        return res.status(201).json({message:'Componente eliminado'})
     } catch (error) {
-        return res.status(500).send('Error al eliminar el componente')
+        return res.status(500).json({message:'Error al eliminar el componente'})
     }
 };
 
@@ -76,13 +76,13 @@ const getProductosByComponente = async (req, res) => {
             include: {
                 model: Producto
             }
-        });
+        });json
         if (!componente || componente.productos.length === 0) {
-            return res.status(404).send('No se encontraron productos para este componente')
+            return res.status(404).json({message:'No se encontraron productos para este componente'})
         }
         return res.status(200).json(componente.productos)
     } catch (error) {
-        return res.status(500).send('Error al obtener los productos del componente')
+        return res.status(500).json({message:'Error al obtener los productos del componente'},error)
     }
 };
 

@@ -18,12 +18,12 @@ const getFabricantesById=async(req,res)=>{
     try{
     const fabricante = await Fabricante.findByPk(idFabricante)
     if(!fabricante){
-        res.status(404).send('Fabricante no encontrado')
+        res.status(404).json({message:'Fabricante no encontrado'})
     }
     return res.status(200).json(fabricante)
 }
     catch{
-    return res.status(404).send('Fabricante no encontrado')
+    return res.status(404).json({message:'Fabricante no encontrado'})
 }
 }
 
@@ -51,10 +51,10 @@ const modificarFabricante = async (req, res) => {
         const fabricante = await Fabricante.findByPk(idFabricante);
 
         if (!fabricante) {
-            return res.status(404).send('Fabricante no encontrado');
+            return res.status(404).json({message:'Fabricante no encontrado'});
         }
         await fabricante.update(datosNuevos);
-        return res.status(200).send('Fabricante actualizado');
+        return res.status(200).json({message:'Fabricante actualizado'});
     } catch (error) {
     }
 };
@@ -66,13 +66,13 @@ const borrarFabricante = async (req, res) => {
         const fabricante = await Fabricante.findByPk(idFabricante);
 
         if (!fabricante) {
-            return res.status(404).send('Fabricante no encontrado');
+            return res.status(404).json({message:'Fabricante no encontrado'});
         }
 
         await fabricante.destroy();
-        return res.status(200).send('Fabricante eliminado');
+        return res.status(200).json({message:'Fabricante eliminado'});
     } catch (error) {
-        return res.status(500).send('Error al eliminar fabricante');
+        return res.status(500).json({message:'Error al eliminar fabricante'});
     }
 };
 
@@ -85,11 +85,11 @@ const getProductosByFabricante = async (req, res) => {
             }
         });
         if (!fabricante || fabricante.productos.length === 0) {
-            return res.status(404).send('No se encontraron productos para este fabricante');
+            return res.status(404).json({message:'No se encontraron productos para este fabricante'});
         }
         return res.status(200).json(fabricante.productos);
     } catch (error) {
-        return res.status(500).send('Error al obtener los productos del fabricante');
+        return res.status(500).json({message:'Error al obtener los productos del fabricante'});
     }
 };
 

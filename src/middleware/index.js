@@ -3,6 +3,12 @@ const fabricanteSchema = require('./fabricanteSchema')
 const componenteSchema = require('./componenteSchema')
 
 
+
+/*
+'validationOptions' evalúa si el campo se está actualizando o se está creando.
+En caso de actualizarse(isUpdating = true) pasa el valor 'optional' para que no todos los campos sean obligatorios.
+
+*/
 const validador = (schema, isUpdating = false) =>{
     return (req,res,next) => {
         
