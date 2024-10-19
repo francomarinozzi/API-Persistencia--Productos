@@ -83,6 +83,9 @@ async function initialProducts(){
         await producto2.addComponente(componentes[0]);
         await producto2.addComponente(componentes[1]);
         await producto3.addComponente(componentes[2]);
+/// 
+        await componente1.addProducto(productos[0]);
+        await componente1.addProducto(productos[1]);
         console.log('Datos creados')
     }
     catch(error){

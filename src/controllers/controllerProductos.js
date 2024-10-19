@@ -84,14 +84,14 @@ const getFabricantesByProducto = async (req,res) =>{
     try{
         const producto = await Producto.findByPk(id,{
             include:{
-                model:Fabricante
+                model:Fabricante,
             }
         })
         if(!producto){
             return res.status(404).json({message:'Producto no encontrado'})
         }
-        //const fabricantes = producto.Fabricantes || 
-        return res.status(200).json(producto.Fabricante)
+        
+        return res.status(200).json({producto:producto})
     }
     catch(error){
         return res.status(404).json({message:'Producto no encontrado',error})
@@ -150,7 +150,7 @@ const getComponentesByProducto = async (req,res) =>{
         if(!producto){
             res.status(404).json({message:'Producto no encontrado'})
         }
-        return res.status(200).json(producto.Componente)
+        return res.status(200).json({producto:producto})
     }
     catch{
         return res.status(404).json({message:'Producto no encontrado'})

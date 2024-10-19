@@ -21,6 +21,6 @@ route.get('/:id/fabricantes', controllerProductos.getFabricantesByProducto) //Ob
 
 route.post('/:id/componente',controllerProductos.asociarProductoConComponente) //asociar un producto con 1 o n componentes
 
-route.get('/:id/fabricante', controllerProductos.getComponentesByProducto) //Obtener todos los componentes de un producto
+route.get('/:id/componentes', controllerProductos.getComponentesByProducto) //Obtener todos los componentes de un producto
 
 module.exports = route

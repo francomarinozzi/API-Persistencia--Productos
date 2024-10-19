@@ -78,6 +78,7 @@ const borrarFabricante = async (req, res) => {
 
 const getProductosByFabricante = async (req, res) => {
     const idFabricante = req.params.id;
+    
     try {
         const fabricante = await Fabricante.findByPk(idFabricante, {
             include: {
@@ -87,7 +88,7 @@ const getProductosByFabricante = async (req, res) => {
         if (!fabricante || fabricante.productos.length === 0) {
             return res.status(404).json({message:'No se encontraron productos para este fabricante'});
         }
-        return res.status(200).json(fabricante.productos);
+        return res.status(200).json({fabricante:fabricante}); //Si quisiera mostrar solo los productos, deberia solo devolver fabricante.productos
     } catch (error) {
         return res.status(500).json({message:'Error al obtener los productos del fabricante'});
     }
