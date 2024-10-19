@@ -76,13 +76,15 @@ const getProductosByComponente = async (req, res) => {
             include: {
                 model: Producto
             }
-        });json
+        });
         if (!componente || componente.productos.length === 0) {
             return res.status(404).json({message:'No se encontraron productos para este componente'})
         }
-        return res.status(200).json(componente.productos)
-    } catch (error) {
-        return res.status(500).json({message:'Error al obtener los productos del componente'},error)
+        return res.status(200).json({componente:componente})
+    } catch(error) {
+        console.error(error)
+        return res.status(500).json({message:'Error al obtener los productos del componente'})
+        
     }
 };
 

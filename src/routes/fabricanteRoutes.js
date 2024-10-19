@@ -15,4 +15,6 @@ route.put('/:id', validador(fabricanteSchema,true),controllerFabricantes.modific
 
 route.delete('/:id', controllerFabricantes.borrarFabricante)
 
+route.get('/:id/productos',controllerFabricantes.getProductosByFabricante)
+
 module.exports=route
